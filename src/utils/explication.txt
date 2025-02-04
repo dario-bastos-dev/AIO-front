@@ -1,0 +1,1 @@
+Funções de utilidades global para o app (formatador de data, moeda, etc.).
