@@ -1,0 +1,1 @@
+Separação entre hooks globais e hooks de páginas.
