@@ -1,1 +1,0 @@
-Validadores para transição de dados/requisições de forma esperada (zod, yup, etc.).

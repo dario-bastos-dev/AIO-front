@@ -1,1 +1,0 @@
-Trechos de layout que irão aparecer apenas em determinadas rotas/telas (header / sidebar / footer).

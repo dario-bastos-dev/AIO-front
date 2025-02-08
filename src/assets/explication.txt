@@ -1,1 +1,0 @@
-Apenas para tratamento de ícones e imagens de forma separada.

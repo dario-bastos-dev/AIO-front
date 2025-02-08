@@ -1,9 +1,11 @@
-export default {
+import cssnano from 'cssnano';
+
+const config = {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    '@tailwindcss/postcss': {},
     cssnano: {
       preset: 'default',
     },
   },
 };
+export default config;

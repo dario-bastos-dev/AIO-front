@@ -14,7 +14,8 @@
       "vite-env.d.ts",
       "postcss.config.js",
       "tailwind.config.js",
-      "biome.json"
+      "biome.json",
+      "src/routeTree.gen.ts"
     ]
   },
   "linter": {

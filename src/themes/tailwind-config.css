@@ -1,3 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-blue-1000: #03091f;
+}
+
+@layer base {
+  body {
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #fff 0%, #8b9cc7 100%);
+  }
+}

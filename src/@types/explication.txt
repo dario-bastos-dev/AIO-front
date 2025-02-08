@@ -1,1 +1,0 @@
-Os tipos separados por pastas com base nos endpoints.

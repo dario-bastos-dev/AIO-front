@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2d6be4;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

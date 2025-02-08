@@ -1,1 +1,0 @@
-Configuração de estilizações globais (global.css / tailwind-config, etc).
