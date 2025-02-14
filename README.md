@@ -1,50 +1,94 @@
-# React + TypeScript + Vite
+# AIO Front-end (All In One)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📋 Sobre o Projeto
 
-Currently, two official plugins are available:
+AIO é uma aplicação web moderna que fornece uma interface elegante para autenticação e gerenciamento de usuários. O projeto foi construído com foco em performance, usabilidade e boas práticas de desenvolvimento.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- **React 19** - Biblioteca para construção de interfaces
+- **TypeScript** - Superset JavaScript com tipagem estática
+- **TanStack Router** - Roteamento type-safe com code splitting
+- **TanStack Query** - Gerenciamento de estado e cache
+- **Tailwind CSS** - Framework CSS utility-first
+- **Shadcn/UI** - Biblioteca de componentes customizáveis
+- **Biome** - Linter e formatter
+- **Vite** - Build tool e dev server
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🏗️ Estrutura do Projeto
 
-- Configure the top-level `parserOptions` property like this:
+## 🔧 Configuração
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Pré-requisitos
+
+- Node.js 18+
+- npm ou yarn
+
+### Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/dario-bastos-dev/AIO-front.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Instale as dependências:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
+# ou
+yarn install
 ```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
+npm start
+# ou
+yarn start
+```
+
+A aplicação estará disponível em [http://localhost:8080](http://localhost:8080)
+
+## 📚 Scripts Disponíveis
+
+- `npm start` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera build de produção
+- `npm run lint` - Executa verificação de linting
+- `npm run preview` - Visualiza build de produção localmente
+
+## 🎨 Estilização
+
+O projeto utiliza Tailwind CSS para estilização, com temas customizados definidos em:
+
+- `index.css`
+
+## 🔒 Autenticação
+
+O sistema de autenticação é gerenciado através dos componentes:
+
+- `form-login.tsx`
+- `form-register.tsx`
+
+## 📱 Layout Responsivo
+
+A interface é totalmente responsiva, utilizando classes Tailwind e design system consistente através do Shadcn/UI.
+
+## 🛠️ Ferramentas de Desenvolvimento
+
+- **Biome** - Configurado através do `biome.json` para linting e formatação
+- **Husky** - Pre-commit hooks para garantir qualidade do código
+- **TypeScript** - Configuração estrita para melhor type safety
+
+## 🔍 Ambiente de Desenvolvimento
+
+O projeto utiliza Vite como ferramenta de build, configurado em `vite.config.ts`, oferecendo:
+
+- Hot Module Replacement (HMR)
+- Code splitting automático
+- Otimização de build
+- Suporte a TypeScript nativo
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
