@@ -1,17 +1,75 @@
+import {
+	ApiResponse,
+	LoginCredentials,
+	RegisterCredentials,
+	User,
+} from "@/@types/api";
+import { LoaderForm } from "@/components/loader";
 import FormLogin from "@/components/login-register/form-login";
 import FormRegister from "@/components/login-register/form-register";
+import { useAuth } from "@/hooks/useAuth";
 import Header from "@/templates/header";
-import { useMatch } from "@tanstack/react-router";
+import { Navigate, useMatch } from "@tanstack/react-router";
+import { useState } from "react";
 
 const Login: React.FC = () => {
 	const matchRoute = useMatch({ from: "/", shouldThrow: false });
 
+	const [errorValue, setErrorValue] = useState<string | null>(null);
+	const [result, setResult] = useState<ApiResponse<User> | null>(null);
+
+	const { login, register, isLoading } = useAuth();
+
+	const handleAction = async (formData: FormData) => {
+		setErrorValue(null);
+
+		let data: ApiResponse<User>;
+
+		let body: RegisterCredentials | LoginCredentials = {} as
+			| LoginCredentials
+			| RegisterCredentials;
+
+		formData.forEach((value, key) => {
+			if (key === "confirmPassword") return;
+			if (value === "") {
+				setErrorValue(key);
+				return;
+			}
+			body = { ...body, [key]: value };
+		});
+
+		if (matchRoute !== undefined && errorValue == null)
+			data = await login(body as LoginCredentials);
+		else {
+			data = await register(body as RegisterCredentials);
+		}
+
+		setResult(data);
+	};
+
 	return (
-		<div className="bg-blue-1000 h-screen">
+		<div className="bg-blue-1000 h-screen relative">
+			{isLoading && <LoaderForm />}
 			<Header match={matchRoute} />
 			<div className=" flex w-[80vw] m-auto">
 				<div className="flex flex-[1] justify-center flex-col p-12 mt-16">
-					<div className="w-[400px]">
+					<div className="max-w-[400px]">
+						{result?.status === "success" && <Navigate to="/home" />}
+
+						{result?.status === "error" && (
+							<div className="bg-white p-4 rounded-md mb-4 border-2 border-gray-500">
+								<h3 className="text-gray-950 text-xl font-medium">
+									{result?.message}
+								</h3>
+
+								{result?.error?.details.map((value, index) => [
+									<p key={index} className="text-red-600 text-base">
+										{value}
+									</p>,
+								])}
+							</div>
+						)}
+
 						{matchRoute !== undefined ? (
 							<>
 								<h1 className=" text-[2.5rem] mb-6 text-transparent bg-clip-text text-gradient">
@@ -20,7 +78,7 @@ const Login: React.FC = () => {
 								<p className="text-[#8b9cc7] text-[.95rem] mb-8">
 									Entre com suas credenciais para acessar sua conta
 								</p>
-								<FormLogin />
+								<FormLogin login={handleAction} error={errorValue} />
 							</>
 						) : (
 							<>
@@ -31,13 +89,13 @@ const Login: React.FC = () => {
 									Junte-se a nós para explorar todos os nossos recursos e
 									serviços
 								</p>
-								<FormRegister />
+								<FormRegister register={handleAction} error={errorValue} />
 							</>
 						)}
 					</div>
 				</div>
 
-				<div>
+				<div className="hidden lg:block">
 					<div className="flex flex-[1] overflow-hidden ">
 						<div className="absolute z-10 w-full h-full right-[-20%] flex items-center justify-center">
 							<svg

@@ -95,6 +95,16 @@
 	--color-primary: #2d6be4;
 }
 
+@theme animation {
+	--animate-rotate: isRotating 1s infinite;
+
+	@keyframes isRotating {
+		to {
+			transform: rotate(1turn);
+		}
+	}
+}
+
 @layer base {
 	body {
 		box-sizing: border-box;

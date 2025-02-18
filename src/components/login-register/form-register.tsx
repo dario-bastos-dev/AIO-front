@@ -2,7 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "../ui/button";
 
-const FormRegister = () => {
+interface FormRegisterProps {
+	register: (formData: FormData) => void;
+	error: string | null;
+}
+
+const FormRegister: React.FC<FormRegisterProps> = ({ register, error }) => {
 	const [confirmPassword, setConfirmPassword] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
@@ -10,15 +15,21 @@ const FormRegister = () => {
 		return password === confirmPassword;
 	}
 
-	const handleRegister = (formData: FormData) => {
-		const email = formData.get("email");
+	const traductError =
+		error === "password" ? "senha" : error === "email" ? "e-mail" : "nome";
 
-		console.log(email);
-	};
 	return (
-		<form key="form-login" action={handleRegister} className="z-20 relative">
+		<form
+			key="form-login"
+			action={register}
+			className="z-20 relative"
+			onSubmit={() => {
+				setPassword("");
+				setConfirmPassword("");
+			}}
+		>
 			<div className="flex flex-col gap-4">
-				<label htmlFor="name" className="flex flex-col">
+				<label htmlFor="name" className="flex flex-col ">
 					<input
 						className="p-2 rounded-md shadow-sm bg-[#1f1f38] border border-solid border-[#30324e] outline-none text-white focus:bg-[#1f1f38] focus:border-[#2d6be4]"
 						type="text"
@@ -27,14 +38,14 @@ const FormRegister = () => {
 					/>
 				</label>
 
-				<label htmlFor="phone" className="flex flex-col">
+				{/*<label htmlFor="phone" className="flex flex-col">
 					<input
 						className="p-2 rounded-md shadow-sm bg-[#1f1f38] border border-solid border-[#30324e] outline-none text-white focus:bg-[#1f1f38] focus:border-[#2d6be4]"
 						type="text"
 						name="phone"
 						placeholder="Telefone"
 					/>
-				</label>
+				</label>*/}
 
 				<label htmlFor="email" className="flex flex-col">
 					<input
@@ -64,12 +75,15 @@ const FormRegister = () => {
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 					/>
-					{validatePassword() === false ? (
+					{validatePassword() === false && (
 						<p className="text-red-400 text-sm mt-1">
 							As senhas estão diferentes
 						</p>
-					) : (
-						""
+					)}
+					{error !== null && (
+						<p className="text-red-400 text-sm mt-1">
+							O campo {traductError} é obrigatório!
+						</p>
 					)}
 				</label>
 			</div>
